@@ -334,7 +334,14 @@ def main():
     )
 
     new_data_types = [
-        shanks_electrode, shanks, probe, data_acq_device, camera_device, nwb_image_series, header_device, associated_files, nwb_electrode_group
+        shanks_electrode,
+        shanks,
+        probe,
+        data_acq_device,
+        camera_device,
+        header_device,
+        associated_files,
+        nwb_electrode_group
     ]
 
     # export the spec to yaml files in the spec folder
