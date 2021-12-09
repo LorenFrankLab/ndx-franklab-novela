@@ -85,9 +85,4 @@ Representation of CameraDevice object in NWB <br>
     **lens**  `string`: info about lens in this camera <br>
     **camera_name**  `string`: name of this camera <br>
 
-#### NbwTimeSeries
-Extension of ImageSeries object in NWB <br>
-**Attributes:** <br>
-    **devices**  `list of Device`: devices used to record video <br>
-
 This extension was created using [ndx-template](https://github.com/nwb-extensions/ndx-template).

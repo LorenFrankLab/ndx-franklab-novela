@@ -81,13 +81,6 @@ groups:
   - name: lens
     dtype: text
     doc: lens info
-- neurodata_type_def: NwbImageSeries
-  neurodata_type_inc: ImageSeries
-  doc: Extension of ImageSeries object in NWB
-  groups:
-  - neurodata_type_inc: Device
-    doc: devices used to record video
-    quantity: '*'
 - neurodata_type_def: HeaderDevice
   neurodata_type_inc: Device
   doc: metadata from global configuration from header

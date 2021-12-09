@@ -1,9 +1,16 @@
 namespaces:
 - author:
   - NovelaDevops
+  - Loren Frank
+  - Eric Denovellis
+  - Ryan Ly
   contact:
   - devops@novelaneuro.com
-  doc: NovelaNeurotechnologies Namespaces
+  - loren@cin.ucsf.edu
+  - eric.denovellis@ucsf.edu
+  - rly@lbl.gov
+  doc: NWB extension to store additional metadata and data types for Loren Frank's
+    Lab
   name: ndx-franklab-novela
   schema:
   - namespace: core
@@ -11,6 +18,5 @@ namespaces:
     - ElectrodeGroup
     - Device
     - NWBDataInterface
-    - ImageSeries
   - source: ndx-franklab-novela.extensions.yaml
-  version: 0.0.011.36
+  version: 0.1.0
