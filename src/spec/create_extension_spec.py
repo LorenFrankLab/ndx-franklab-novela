@@ -8,13 +8,11 @@ from pynwb.spec import NWBNamespaceBuilder, export_spec, NWBGroupSpec, NWBAttrib
 def main():
     # these arguments were auto-generated from your cookiecutter inputs
     ns_builder = NWBNamespaceBuilder(
-        doc="""NovelaNeurotechnologies Namespaces""",
+        doc="""NWB extension to store additional metadata and data types for Loren Frank's Lab""",
         name="""ndx-franklab-novela""",
-
-        version="""0.0.011.36""",
-
-        author=list(map(str.strip, """NovelaDevops""".split(','))),
-        contact=list(map(str.strip, """devops@novelaneuro.com""".split(',')))
+        version="""0.1.0""",
+        author=["NovelaDevops", "Loren Frank", "Eric Denovellis", "Ryan Ly"],
+        contact=["devops@novelaneuro.com", "loren@cin.ucsf.edu", "eric.denovellis@ucsf.edu", "rly@lbl.gov"]
     )
 
     # # as in which namespace they are found
@@ -23,7 +21,6 @@ def main():
     ns_builder.include_type('ElectrodeGroup', namespace='core')
     ns_builder.include_type('Device', namespace='core')
     ns_builder.include_type('NWBDataInterface', namespace='core')
-    ns_builder.include_type('ImageSeries', namespace='core')
 
     # see https://pynwb.readthedocs.io/en/latest/extensions.html#extending-nwb
     # for more information
@@ -193,19 +190,6 @@ def main():
                 dtype='text'
             )
         ]
-    )
-
-    nwb_image_series = NWBGroupSpec(
-        neurodata_type_def='NwbImageSeries',
-        neurodata_type_inc='ImageSeries',
-        doc='Extension of ImageSeries object in NWB',
-        groups=[
-            NWBGroupSpec(
-                neurodata_type_inc='Device',
-                doc='devices used to record video',
-                quantity='*'
-            )
-        ],
     )
 
     header_device = NWBGroupSpec(

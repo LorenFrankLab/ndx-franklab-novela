@@ -28,5 +28,4 @@ from .camera_device import CameraDevice
 from .data_acq_device import DataAcqDevice
 from .header_device import HeaderDevice
 from .nwb_electrode_group import NwbElectrodeGroup
-from .nwb_image_series import NwbImageSeries
 from .probe import Probe, Shank, ShanksElectrode

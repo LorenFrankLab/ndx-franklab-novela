@@ -1,3 +1,4 @@
-hdmf_docutils
-hdmf
-pynwb
+# pinned dependencies to reproduce a working development environment
+hdmf_docutils==0.4.4
+hdmf==3.1.1
+pynwb==2.0.0
