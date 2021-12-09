@@ -131,12 +131,14 @@ def main():
             NWBAttributeSpec(
                 name='amplifier',
                 doc='amplifier',
-                dtype='text'
+                dtype='text',
+                required=False
             ),
             NWBAttributeSpec(
                 name='adc_circuit',
                 doc='adc_circuit',
-                dtype='text'
+                dtype='text',
+                required=False
             ),
         ]
     )

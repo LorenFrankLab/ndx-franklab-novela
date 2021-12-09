@@ -1,11 +1,11 @@
 import unittest
 from unittest.mock import Mock
 
-from src.pynwb.ndx_franklab_novela.probe import Probe, ShanksElectrode, Shank
+from src.pynwb.ndx_franklab_novela import Probe, ShanksElectrode, Shank
 
 
 class TestShanksElectrode(unittest.TestCase):
-    
+
     def test_shanks_electrode_successfully_created(self):
         shanks_electrode = ShanksElectrode(
             name='0',
@@ -95,4 +95,3 @@ class TestProbe(unittest.TestCase):
             mock_shank_1.name: mock_shank_1,
             mock_shank_2.name: mock_shank_2
         })
-
