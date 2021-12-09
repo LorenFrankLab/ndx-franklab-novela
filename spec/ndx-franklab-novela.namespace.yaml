@@ -6,7 +6,7 @@ namespaces:
   - Ryan Ly
   contact:
   - devops@novelaneuro.com
-  - loren@cin.ucsf.edu
+  - loren.frank@ucsf.edu
   - eric.denovellis@ucsf.edu
   - rly@lbl.gov
   doc: NWB extension to store additional metadata and data types for Loren Frank's
