@@ -174,7 +174,8 @@ class TestNWBFileReading(TestCase):
                 content='1 2 3 content of file test',
                 task_epochs='1, 2'
         )
-        self.nwb_file_content.add_processing_module(ProcessingModule('associated_files', 'description_of_associaed_files'))
+        pm = ProcessingModule('associated_files', 'description_of_associaed_files')
+        self.nwb_file_content.add_processing_module(pm)
         self.nwb_file_content.processing['associated_files'].add(associated_files)
 
         nwb_file_handler = NWBHDF5IO('associated_files.nwb', mode='w')
@@ -185,11 +186,12 @@ class TestNWBFileReading(TestCase):
         with pynwb.NWBHDF5IO('associated_files.nwb', 'r') as nwb_file_handler:
             nwb_file = nwb_file_handler.read()
 
-            self.assertIsInstance(nwb_file.processing['associated_files']['file1'], AssociatedFiles)
-            self.assertEqual('file1', nwb_file.processing['associated_files']['file1'].name)
-            self.assertEqual('description of file1', nwb_file.processing['associated_files']['file1'].fields['description'])
-            self.assertEqual('1 2 3 content of file test', nwb_file.processing['associated_files']['file1'].fields['content'])
-            self.assertEqual('1, 2', nwb_file.processing['associated_files']['file1'].fields['task_epochs'])
+            af1 = nwb_file.processing['associated_files']['file1']
+            self.assertIsInstance(af1, AssociatedFiles)
+            self.assertEqual('file1', af1.name)
+            self.assertEqual('description of file1', af1.fields['description'])
+            self.assertEqual('1 2 3 content of file test', af1.fields['content'])
+            self.assertEqual('1, 2', af1.fields['task_epochs'])
 
         self.delete_nwb('associated_files')
 
