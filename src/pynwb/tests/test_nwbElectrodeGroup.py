@@ -3,7 +3,7 @@ from unittest.mock import Mock
 
 from pynwb.device import Device
 
-from src.pynwb.ndx_franklab_novela.nwb_electrode_group import NwbElectrodeGroup
+from src.pynwb.ndx_franklab_novela import NwbElectrodeGroup
 
 
 class TestNwbElectrodeGroup(unittest.TestCase):
@@ -34,13 +34,13 @@ class TestNwbElectrodeGroup(unittest.TestCase):
         )
 
         self.assertIsInstance(nwb_electrode_group, NwbElectrodeGroup)
-        self.assertEquals(nwb_electrode_group.name, name)
-        self.assertEquals(nwb_electrode_group.description, description)
-        self.assertEquals(nwb_electrode_group.location, location)
-        self.assertEquals(nwb_electrode_group.device, device)
-        self.assertEquals(nwb_electrode_group.position, position)
-        self.assertEquals(nwb_electrode_group.targeted_location, targeted_location)
-        self.assertEquals(nwb_electrode_group.targeted_x, targeted_x)
-        self.assertEquals(nwb_electrode_group.targeted_y, targeted_y)
-        self.assertEquals(nwb_electrode_group.targeted_z, targeted_z)
-        self.assertEquals(nwb_electrode_group.units, units)
+        self.assertEqual(nwb_electrode_group.name, name)
+        self.assertEqual(nwb_electrode_group.description, description)
+        self.assertEqual(nwb_electrode_group.location, location)
+        self.assertEqual(nwb_electrode_group.device, device)
+        self.assertEqual(nwb_electrode_group.position, position)
+        self.assertEqual(nwb_electrode_group.targeted_location, targeted_location)
+        self.assertEqual(nwb_electrode_group.targeted_x, targeted_x)
+        self.assertEqual(nwb_electrode_group.targeted_y, targeted_y)
+        self.assertEqual(nwb_electrode_group.targeted_z, targeted_z)
+        self.assertEqual(nwb_electrode_group.units, units)

@@ -1,11 +1,11 @@
 import unittest
 from unittest.mock import Mock
 
-from src.pynwb.ndx_franklab_novela.probe import Probe, ShanksElectrode, Shank
+from src.pynwb.ndx_franklab_novela import Probe, ShanksElectrode, Shank
 
 
 class TestShanksElectrode(unittest.TestCase):
-    
+
     def test_shanks_electrode_successfully_created(self):
         shanks_electrode = ShanksElectrode(
             name='0',
@@ -43,6 +43,9 @@ class TestShank(unittest.TestCase):
         shank.add_shanks_electrode(mock_shanks_electrode_1)
         shank.add_shanks_electrode(mock_shanks_electrode_2)
 
+        self.assertIs(shank.get_shanks_electrode('1'), mock_shanks_electrode_1)
+        self.assertIs(shank.get_shanks_electrode('2'), mock_shanks_electrode_2)
+
         self.assertIsInstance(shank, Shank)
 
         self.assertIsInstance(shank.name, str)
@@ -59,7 +62,9 @@ class TestProbe(unittest.TestCase):
 
     def test_probe_successfully_created(self):
         mock_shank_1 = Mock(spec=Shank)
+        mock_shank_1.name = '1'
         mock_shank_2 = Mock(spec=Shank)
+        mock_shank_2.name = '2'
 
         probe = Probe(
             id=1,
@@ -72,6 +77,9 @@ class TestProbe(unittest.TestCase):
         )
         probe.add_shank(mock_shank_1)
         probe.add_shank(mock_shank_2)
+
+        self.assertIs(probe.get_shank('1'), mock_shank_1)
+        self.assertIs(probe.get_shank('2'), mock_shank_2)
 
         self.assertIsInstance(probe, Probe)
 
@@ -92,7 +100,6 @@ class TestProbe(unittest.TestCase):
         self.assertEqual(probe.contact_side_numbering, True)
         self.assertEqual(probe.contact_size, 1.0)
         self.assertEqual(probe.shanks, {
-            mock_shank_1.name: mock_shank_1,
-            mock_shank_2.name: mock_shank_2
+            '1': mock_shank_1,
+            '2': mock_shank_2
         })
-

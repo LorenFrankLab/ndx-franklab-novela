@@ -62,9 +62,11 @@ groups:
   - name: amplifier
     dtype: text
     doc: amplifier
+    required: false
   - name: adc_circuit
     dtype: text
     doc: adc_circuit
+    required: false
 - neurodata_type_def: CameraDevice
   neurodata_type_inc: Device
   doc: A custom Device interface

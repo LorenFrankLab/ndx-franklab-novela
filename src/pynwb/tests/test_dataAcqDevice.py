@@ -1,6 +1,6 @@
 import unittest
 
-from src.pynwb.ndx_franklab_novela.data_acq_device import DataAcqDevice
+from src.pynwb.ndx_franklab_novela import DataAcqDevice
 
 
 class TestDataAcqDevice(unittest.TestCase):
@@ -34,14 +34,11 @@ class TestDataAcqDevice(unittest.TestCase):
         )
 
         self.assertIsInstance(data_acq_device, DataAcqDevice)
-        
+
         self.assertIsInstance(data_acq_device.name, str)
         self.assertIsInstance(data_acq_device.system, str)
-        self.assertIsInstance(data_acq_device.amplifier, str)
-        self.assertIsInstance(data_acq_device.adc_circuit, str)
 
         self.assertEqual(data_acq_device.name, 'DataAcqDevice1')
         self.assertEqual(data_acq_device.system, 'System1')
-        self.assertEqual(data_acq_device.amplifier, '')
-        self.assertEqual(data_acq_device.adc_circuit, '')
-
+        self.assertIsNone(data_acq_device.amplifier)
+        self.assertIsNone(data_acq_device.adc_circuit)

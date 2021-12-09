@@ -1,12 +1,11 @@
 # -*- coding: utf-8 -*-
-
-version = "0.0.011.36"
-print(version)
-
 import os
 from shutil import copy2
 
 from setuptools import find_packages, setup
+
+version = "0.1.0"
+print(version)
 
 # load README.md/README.rst file
 try:
@@ -20,7 +19,7 @@ try:
             readme_type = 'text/x-rst; charset=UTF-8'
     else:
         readme = ""
-except:
+except Exception:
     readme = ""
 
 setup_args = {
