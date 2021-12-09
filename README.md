@@ -14,6 +14,15 @@ The original published extension maintained by NovelaNeuro can be installed usin
 `conda install -c conda-forge -c novelakrk ndx-franklab-novela`
 
 
+# How to install
+
+Add ndx-franklab-novela to your conda environment<br>
+```pip install git+git://github.com/LorenFrankLab/ndx-franklab-novela```
+
+The original published extension maintained by NovelaNeuro can be installed using:
+```conda install -c conda-forge -c novelakrk ndx-franklab-novela```
+
+
 # Extensions
 
 ## AssociatedFiles
