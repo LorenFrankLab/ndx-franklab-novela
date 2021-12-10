@@ -7,6 +7,6 @@ dependencies:
   - python>=3.6
   - python-dateutil
   - setuptools
-  - hdmf
-  - pynwb
+  - hdmf>=3.1.1,<4
+  - pynwb>=2.0.0,<3
   - pytest

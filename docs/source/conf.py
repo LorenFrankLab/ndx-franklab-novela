@@ -18,12 +18,12 @@
 # -- Project information -----------------------------------------------------
 
 project = 'ndx-franklab-novela'
-copyright = '2020, NovelaDevops'
-author = 'NovelaDevops'
+copyright = '2020-2021, NovelaNeurotechnologies, Loren Frank, Eric Denovellis, Ryan Ly'
+author = 'NovelaNeurotechnologies, Loren Frank, Eric Denovellis, Ryan Ly'
 
 # The short X.Y version
 
-version = '0.0.011.36'
+version = '0.1.0'
 
 
 # The full version, including alpha/beta/rc tags
@@ -49,7 +49,7 @@ templates_path = ['_templates']
 #
 # This is also used if you do content translation via gettext catalogs.
 # Usually you set "language" from the command line for these cases.
-language = 'English'
+language = 'en'
 
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
@@ -73,6 +73,12 @@ html_static_path = ['_static']
 # -- Extension configuration -------------------------------------------------
 
 # -- Options for intersphinx extension ---------------------------------------
+
+# Example configuration for intersphinx: refer to the Python standard library.
+intersphinx_mapping = {
+    'python': ('https://docs.python.org/3', None),
+}
+
 ############################################################################
 #  CUSTOM CONFIGURATIONS ADDED BY THE NWB TOOL FOR GENERATING FORMAT DOCS
 ###########################################################################
@@ -81,7 +87,10 @@ import sphinx_rtd_theme  # noqa: E402
 import textwrap  # noqa: E402
 
 # -- Options for intersphinx  ---------------------------------------------
-intersphinx_mapping = {'core': ('https://nwb-schema.readthedocs.io/en/latest/', None)}
+intersphinx_mapping.update({
+    'core': ('https://nwb-schema.readthedocs.io/en/latest/', None),
+    'hdmf-common': ('https://hdmf-common-schema.readthedocs.io/en/latest/', None),
+})
 
 # -- Generate sources from YAML---------------------------------------------------
 # Always rebuild the source docs from YAML even if the folder with the source files already exists
@@ -104,8 +113,11 @@ def run_doc_autogen(_):
 
 def setup(app):
     app.connect('builder-inited', run_doc_autogen)
-    app.add_stylesheet("theme_overrides.css")  # overrides for wide tables in RTD theme
-
+    # overrides for wide tables in RTD theme
+    try:
+        app.add_css_file("theme_overrides.css")  # Used by newer Sphinx versions
+    except AttributeError:
+        app.add_stylesheet("theme_overrides.css")  # Used by older version of Sphinx
 
 # -- Customize sphinx settings
 numfig = True

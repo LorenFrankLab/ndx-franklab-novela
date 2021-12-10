@@ -1,5 +1,5 @@
 Specification for the ndx-franklab-novela extension
-==================================
+===================================================
 
 .. toctree::
     :numbered:
