@@ -4,7 +4,7 @@ from shutil import copy2
 
 from setuptools import find_packages, setup
 
-version = "0.1.0"
+version = "0.2.0"
 print(version)
 
 # load README.md/README.rst file
@@ -34,7 +34,8 @@ setup_args = {
     'license': 'BSD 3-Clause',
     'install_requires': [
         'hdmf>=3.1.1,<4',
-        'pynwb>=2.0.0,<3'
+        'pynwb>=2.0.0,<3',
+        "ndx-optogenetics>=0.2.0",
     ],
     'packages': find_packages('src/pynwb'),
     'package_dir': {'': 'src/pynwb'},
