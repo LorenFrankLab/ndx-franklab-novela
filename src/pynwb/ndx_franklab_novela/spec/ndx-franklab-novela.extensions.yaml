@@ -317,11 +317,9 @@ groups:
   - name: spatial_filter_cameras_cm_per_pixel
     neurodata_type_inc: VectorData
     dtype: float
-    doc: 'The cm/pixel values for each spatial filter camera used in this epoch, in
-      the same order as `spatial_filter_cameras`. NOTE: The CameraDevice neurodata
-      type has a `meters_per_pixel` attribute that should be used when this column
-      is not present. However, if this column is present, it should be used instead
-      of the `meters_per_pixel` attribute for this epoch.'
+    doc: The cm/pixel values for each spatial filter camera used in this epoch, in
+      the same order as `spatial_filter_cameras`. Use this if the cm/pixel values
+      change per epoch. Otherwise, use the `meters_per_pixel` attribute of `CameraDevice`.
     quantity: '?'
   - name: ripple_filter_on
     neurodata_type_inc: VectorData
