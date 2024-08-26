@@ -83,10 +83,6 @@ groups:
   - name: lens
     dtype: text
     doc: lens info
-  - name: serial_number
-    dtype: text
-    doc: Serial number of the camera.
-    required: false
   - name: frame_rate
     dtype: float
     doc: Frame rate of the camera, in frames per second.

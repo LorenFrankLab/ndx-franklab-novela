@@ -164,12 +164,6 @@ def main():
                 dtype='text'
             ),
             NWBAttributeSpec(
-                name="serial_number",
-                doc="Serial number of the camera.",
-                dtype="text",
-                required=False,
-            ),
-            NWBAttributeSpec(
                 name="frame_rate",
                 doc="Frame rate of the camera, in frames per second.",
                 dtype="float",
