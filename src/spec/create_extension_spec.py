@@ -365,12 +365,6 @@ def main():
         # TODO some lab members have other filters. Add those parameters below.
         datasets=[
             NWBDatasetSpec(
-                name="experimenter",
-                neurodata_type_inc="VectorData",
-                doc=("Name of the experimenter."),
-                dtype="text",
-            ),
-            NWBDatasetSpec(
                 name="epoch_name",
                 neurodata_type_inc="VectorData",
                 doc=("Name of the epoch."),
