@@ -87,14 +87,6 @@ groups:
     dtype: float
     doc: Frame rate of the camera, in frames per second.
     required: false
-  - name: resolution_in_pixels
-    dtype: int
-    dims:
-    - w h
-    shape:
-    - 2
-    doc: Width and height of the camera video in pixels, e.g., (1292, 964).
-    required: false
 - neurodata_type_def: HeaderDevice
   neurodata_type_inc: Device
   doc: metadata from global configuration from header

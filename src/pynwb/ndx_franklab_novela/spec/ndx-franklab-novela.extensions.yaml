@@ -83,21 +83,9 @@ groups:
   - name: lens
     dtype: text
     doc: lens info
-  - name: serial_number
-    dtype: text
-    doc: Serial number of the camera.
-    required: false
   - name: frame_rate
     dtype: float
     doc: Frame rate of the camera, in frames per second.
-    required: false
-  - name: resolution_in_pixels
-    dtype: int
-    dims:
-    - w h
-    shape:
-    - 2
-    doc: Width and height of the camera video in pixels, e.g., (1292, 964).
     required: false
 - neurodata_type_def: HeaderDevice
   neurodata_type_inc: Device
@@ -208,10 +196,6 @@ groups:
     enters the rectangle, then every time the particular theta phase is detected,
     immediately apply one stimulation bout (accounting for the lockout period).
   datasets:
-  - name: experimenter
-    neurodata_type_inc: VectorData
-    dtype: text
-    doc: Name of the experimenter.
   - name: epoch_name
     neurodata_type_inc: VectorData
     dtype: text

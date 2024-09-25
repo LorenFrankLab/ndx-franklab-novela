@@ -169,14 +169,6 @@ def main():
                 dtype="float",
                 required=False,
             ),
-            NWBAttributeSpec(
-                name="resolution_in_pixels",
-                doc=("Width and height of the camera video in pixels, e.g., (1292, 964)."),
-                dtype="int",
-                shape=(2, ),
-                dims=("w h", ),
-                required=False,
-            ),
         ]
     )
 
