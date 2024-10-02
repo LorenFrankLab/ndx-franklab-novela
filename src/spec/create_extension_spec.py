@@ -436,8 +436,8 @@ def main():
                      "rectangular region of the video that was used for space-specific stimulation. "
                      "(0,0) is the bottom-left corner of the video. Use (-1, -1) if the spatial filter was not used."),
                 dtype="int",
-                shape=(2, ),
-                dims=("x y", ),
+                shape=(None, 2),
+                dims=("n_epochs", "x y"),
                 quantity="?",
             ),
             NWBDatasetSpec(
@@ -447,8 +447,8 @@ def main():
                      "rectangular region of the video that was used for space-specific stimulation. "
                      "(0,0) is the bottom-left corner of the video. Use (-1, -1) if the spatial filter was not used."),
                 dtype="int",
-                shape=(2, ),
-                dims=("x y", ),
+                shape=(None, 2),
+                dims=("n_epochs", "x y"),
                 quantity="?",
             ),
             NWBDatasetSpec(

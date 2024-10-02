@@ -261,8 +261,10 @@ groups:
     neurodata_type_inc: VectorData
     dtype: int
     dims:
+    - n_epochs
     - x y
     shape:
+    - null
     - 2
     doc: If the spatial filter was used, the (x, y) coordinate of the bottom-left
       corner pixel of the rectangular region of the video that was used for space-specific
@@ -273,8 +275,10 @@ groups:
     neurodata_type_inc: VectorData
     dtype: int
     dims:
+    - n_epochs
     - x y
     shape:
+    - null
     - 2
     doc: If the spatial filter was used, the (x, y) coordinate of the top-right corner
       pixel of the rectangular region of the video that was used for space-specific
