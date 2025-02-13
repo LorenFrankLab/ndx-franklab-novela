@@ -15,9 +15,7 @@ class TestCameraDevice(TestCase):
             model='ndx2000',
             lens='500dpt',
             manufacturer='sony',
-            serial_number='12345',
             frame_rate=30.0,
-            resolution_in_pixels=(1292, 964),
         )
 
         self.assertEqual(cam_1.name, '1')
@@ -27,6 +25,4 @@ class TestCameraDevice(TestCase):
         self.assertEqual(cam_1.model, 'ndx2000')
         self.assertEqual(cam_1.lens, '500dpt')
         self.assertEqual(cam_1.manufacturer, 'sony')
-        self.assertEqual(cam_1.serial_number, '12345')
         self.assertEqual(cam_1.frame_rate, 30.0)
-        self.assertEqual(cam_1.resolution_in_pixels, (1292, 964))

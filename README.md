@@ -105,15 +105,12 @@ Representation of a camera device in NWB.
 - **model**  `string`: model of this camera device
 - **lens**  `string`: info about lens in this camera
 - **camera_name**  `string`: name of this camera
-- **serial_number** `string`: serial number of this camera (optional)
 - **frame_rate**  `float`: frame rate of this camera (optional)
-- **resolution_in_pixels** `float`, shape `(2, )`: resolution of this camera in pixels (optional)
 
 ## FrankLabOptogeneticEpochsTable
 An extension of the `OptogeneticEpochsTable` from [ndx-optogenetics](https://github.com/rly/ndx-optogenetics) with the following columns:
 
 **Columns:**
-- **experimenter**  `string`: experimenter of this epoch
 - **epoch_name**  `string`: name of this epoch
 - **epoch_number**  `int`: 1-indexed number of this epoch
 - **convenience_code**  `string`: convenience code of this epoch

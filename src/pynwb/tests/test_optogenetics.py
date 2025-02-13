@@ -19,9 +19,7 @@ class TestFrankLabOptogeneticsEpochsTable(TestCase):
             model='ndx2000',
             lens='500dpt',
             manufacturer='sony',
-            serial_number='12345',
             frame_rate=30.0,
-            resolution_in_pixels=(1292, 964),
         )
         nwbfile.add_device(camera1)
 
@@ -33,9 +31,7 @@ class TestFrankLabOptogeneticsEpochsTable(TestCase):
             model='ndx2000',
             lens='500dpt',
             manufacturer='sony',
-            serial_number='12345',
             frame_rate=30.0,
-            resolution_in_pixels=(1292, 964),
         )
         nwbfile.add_device(camera2)
 
@@ -49,12 +45,12 @@ class TestFrankLabOptogeneticsEpochsTable(TestCase):
             start_time=0.0,
             stop_time=100.0,
             stimulation_on=True,
+            power_in_mW=100.0,
             pulse_length_in_ms=40.0,
             period_in_ms=250.0,
             number_pulses_per_pulse_train=100,
             number_trains=1,
             intertrain_interval_in_ms=0.0,
-            experimenter="Xulu Sun",
             epoch_name="20220911_Wallie_01_sleep",
             epoch_number=1,
             convenience_code="a1",
@@ -92,12 +88,12 @@ class TestFrankLabOptogeneticsEpochsTable(TestCase):
             assert read_epochs[0, "start_time"] == 0.0
             assert read_epochs[0, "stop_time"] == 100.0
             assert read_epochs[0, "stimulation_on"]
+            assert read_epochs[0, "power_in_mW"] == 100.0
             assert read_epochs[0, "pulse_length_in_ms"] == 40.0
             assert read_epochs[0, "period_in_ms"] == 250.0
             assert read_epochs[0, "number_pulses_per_pulse_train"] == 100
             assert read_epochs[0, "number_trains"] == 1
             assert read_epochs[0, "intertrain_interval_in_ms"] == 0.0
-            assert read_epochs[0, "experimenter"] == "Xulu Sun"
             assert read_epochs[0, "epoch_name"] == "20220911_Wallie_01_sleep"
             assert read_epochs[0, "epoch_number"] == 1
             assert read_epochs[0, "convenience_code"] == "a1"
