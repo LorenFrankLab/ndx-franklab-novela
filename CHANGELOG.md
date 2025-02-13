@@ -1,5 +1,10 @@
 # ndx-franklab-novela Changelog
 
+## [Unreleased]
+
+- Added `FrankLabOptogeneticEpochsTable` to store optogenetic stimulation metadata.
+- Added extension dependency on `ndx-optogenetics`.
+
 ## 0.1.0 (December 9, 2021)
 
 - Removed `NdxImageSeries` data type. The core NWB `ImageSeries` type should be used instead.
