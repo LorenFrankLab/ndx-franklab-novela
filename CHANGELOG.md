@@ -1,6 +1,6 @@
 # ndx-franklab-novela Changelog
 
-## [Unreleased]
+## 0.2.0 (February 14, 2025)
 
 - Added `FrankLabOptogeneticEpochsTable` to store optogenetic stimulation metadata.
 - Added extension dependency on `ndx-optogenetics`.
