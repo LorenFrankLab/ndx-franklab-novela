@@ -2,25 +2,20 @@
 
 import os.path
 
-from pynwb.spec import NWBNamespaceBuilder, export_spec, NWBGroupSpec, NWBAttributeSpec
+from pynwb.spec import NWBNamespaceBuilder, export_spec, NWBGroupSpec, NWBAttributeSpec, NWBDatasetSpec, NWBRefSpec
 
 
 def main():
-    # these arguments were auto-generated from your cookiecutter inputs
     ns_builder = NWBNamespaceBuilder(
         doc="""NWB extension to store additional metadata and data types for Loren Frank's Lab""",
         name="""ndx-franklab-novela""",
-        version="""0.1.0""",
+        version="""0.2.0""",
         author=["NovelaDevops", "Loren Frank", "Eric Denovellis", "Ryan Ly"],
-        contact=["devops@novelaneuro.com", "loren@cin.ucsf.edu", "eric.denovellis@ucsf.edu", "rly@lbl.gov"]
+        contact=["devops@novelaneuro.com", "loren.frank@ucsf.edu", "eric.denovellis@ucsf.edu", "rly@lbl.gov"]
     )
 
-    # # as in which namespace they are found
-    # this is similar to specifying the Python modules that need to be imported
-    # to use your new data types
-    ns_builder.include_type('ElectrodeGroup', namespace='core')
-    ns_builder.include_type('Device', namespace='core')
-    ns_builder.include_type('NWBDataInterface', namespace='core')
+    ns_builder.include_namespace("core")
+    ns_builder.include_namespace(namespace="ndx-optogenetics")
 
     # see https://pynwb.readthedocs.io/en/latest/extensions.html#extending-nwb
     # for more information
@@ -167,7 +162,13 @@ def main():
                 name='lens',
                 doc='lens info',
                 dtype='text'
-            )
+            ),
+            NWBAttributeSpec(
+                name="frame_rate",
+                doc="Frame rate of the camera, in frames per second.",
+                dtype="float",
+                required=False,
+            ),
         ]
     )
 
@@ -335,6 +336,189 @@ def main():
         ]
     )
 
+    frank_lab_optogenetic_epochs_table = NWBGroupSpec(
+        neurodata_type_def="FrankLabOptogeneticEpochsTable",
+        neurodata_type_inc="OptogeneticEpochsTable",
+        doc=("General metadata about the optogenetic stimulation that may change per epoch, with fields "
+             "specific to Loren Frank Lab experiments. If the spatial filter is ON, then the experimenter "
+             "can stimulate in either open (frequency-based) or closed loop (theta-based), only when animal is in "
+             "a particular position. If the spatial filter is OFF, then ignore the position "
+             "(this is not common / doesn't happen). If the spatial filter is ON and the experimeter is "
+             "stimulating in open loop mode and the animal enters the spatial filter rectangle, then "
+             "immediately apply one and only one stimulation bout. If stimulating in closed loop mode and the animal "
+             "enters the rectangle, then every time the particular theta phase is detected, "
+             "immediately apply one stimulation bout (accounting for the lockout period)."),
+        # TODO some lab members have other filters. Add those parameters below.
+        datasets=[
+            NWBDatasetSpec(
+                name="epoch_name",
+                neurodata_type_inc="VectorData",
+                doc=("Name of the epoch."),
+                dtype="text",
+            ),
+            NWBDatasetSpec(
+                name="epoch_number",
+                neurodata_type_inc="VectorData",
+                doc=("1-indexed number of the epoch."),
+                dtype="int",
+            ),
+            NWBDatasetSpec(
+                name="convenience_code",
+                neurodata_type_inc="VectorData",
+                doc=("Convenience code of the epoch."),
+                dtype="text",
+            ),
+            NWBDatasetSpec(
+                name="epoch_type",
+                neurodata_type_inc="VectorData",
+                doc=("Type of the epoch."),
+                dtype="text",
+            ),
+            NWBDatasetSpec(
+                name="theta_filter_on",
+                neurodata_type_inc="VectorData",
+                doc=("Whether the theta filter was on. A theta filter is closed-loop stimulation - read one "
+                     "tetrode and calculate the phase. Depending on the phase of theta, apply stimulation "
+                     "immediately. "
+                     "If this column is not present, then the theta filter was not used."),
+                dtype="bool",
+                quantity="?",
+            ),
+            NWBDatasetSpec(
+                name="theta_filter_lockout_period_in_samples",
+                neurodata_type_inc="VectorData",
+                doc=("If the theta filter was used, lockout period in the number of samples (based on the "
+                     "clock of the SpikeGadgets hardware) needed between stimulations, start to start. "
+                     "Use -1 if the theta filter was not used."),
+                dtype="int",
+                quantity="?",
+            ),
+            NWBDatasetSpec(
+                name="theta_filter_phase_in_deg",
+                neurodata_type_inc="VectorData",
+                doc=("If the theta filter was used, phase in degrees during closed-loop theta phase-specific "
+                     "stimulation experiments. 0 is defined as the trough. 90 is ascending phase. Options are: "
+                     "0, 90, 180, 270, 360, NaN. Use NaN if the theta filter was not used."),
+                dtype="float",
+                quantity="?",
+            ),
+            NWBDatasetSpec(
+                name="theta_filter_reference_ntrode",
+                neurodata_type_inc="VectorData",
+                doc=("If the theta filter was used, reference electrode that used used for theta phase-specific "
+                     "stimulation. ntrode is related to SpikeGadgets. ntrodes are specified in the electrode groups. "
+                     "(note that ntrodes are 1-indexed.) mapping from ntrode to electrode ID is in the electrode "
+                     "metadata files. Use -1 if the theta filter was not used."),
+                dtype="int",
+                quantity="?",
+            ),
+            NWBDatasetSpec(
+                name="spatial_filter_on",
+                neurodata_type_inc="VectorData",
+                doc=("Whether the spatial filter was on. Closed-loop stimulation based on whether the position of "
+                     "the animal is within a specified rectangular region of the video. "
+                     "If this column is not present, then the spatial filter was not used."),
+                dtype="bool",
+                quantity="?",
+            ),
+            NWBDatasetSpec(
+                name="spatial_filter_lockout_period_in_samples",
+                neurodata_type_inc="VectorData",
+                doc=("If the spatial filter was used, lockout period in the number of samples. "
+                     "Uses trodes time (samplecount). Use -1 if the spatial filter was not used."),
+                dtype="int",
+                quantity="?",
+            ),
+            NWBDatasetSpec(
+                name="spatial_filter_bottom_left_coord_in_pixels",
+                neurodata_type_inc="VectorData",
+                doc=("If the spatial filter was used, the (x, y) coordinate of the bottom-left corner pixel of the "
+                     "rectangular region of the video that was used for space-specific stimulation. "
+                     "(0,0) is the bottom-left corner of the video. Use (-1, -1) if the spatial filter was not used."),
+                dtype="int",
+                shape=(None, 2),
+                dims=("n_epochs", "x y"),
+                quantity="?",
+            ),
+            NWBDatasetSpec(
+                name="spatial_filter_top_right_coord_in_pixels",
+                neurodata_type_inc="VectorData",
+                doc=("If the spatial filter was used, the (x, y) coordinate of the top-right corner pixel of the "
+                     "rectangular region of the video that was used for space-specific stimulation. "
+                     "(0,0) is the bottom-left corner of the video. Use (-1, -1) if the spatial filter was not used."),
+                dtype="int",
+                shape=(None, 2),
+                dims=("n_epochs", "x y"),
+                quantity="?",
+            ),
+            NWBDatasetSpec(
+                name="spatial_filter_cameras_index",
+                neurodata_type_inc="VectorIndex",
+                doc=("Index column for `spatial_filter_cameras` so that each epoch can have multiple cameras."),
+                quantity="?",
+            ),
+            NWBDatasetSpec(
+                name="spatial_filter_cameras",
+                neurodata_type_inc="VectorData",
+                doc=("References to camera objects used for the spatial filter."),
+                dtype=NWBRefSpec(
+                    target_type="CameraDevice",
+                    reftype="object",
+                ),
+                quantity="?",
+            ),
+            NWBDatasetSpec(
+                name="spatial_filter_cameras_cm_per_pixel_index",
+                neurodata_type_inc="VectorIndex",
+                doc=("Index column for `spatial_filter_cameras_cm_per_pixel` so that each epoch can have "
+                     "multiple cameras."),
+                quantity="?",
+            ),
+            NWBDatasetSpec(
+                name="spatial_filter_cameras_cm_per_pixel",
+                neurodata_type_inc="VectorData",
+                doc=("The cm/pixel values for each spatial filter camera used in this epoch, in the same order "
+                     "as `spatial_filter_cameras`. Use this if the cm/pixel values change per epoch. Otherwise, "
+                     "use the `meters_per_pixel` attribute of `CameraDevice`."),
+                dtype="float",
+                quantity="?",
+            ),
+            NWBDatasetSpec(
+                name="ripple_filter_on",
+                neurodata_type_inc="VectorData",
+                doc=("Whether the ripple filter was on. Closed-loop stimulation based on whether a ripple was "
+                     "detected - whether N tetrodes have their signal cross the standard deviation threshold. "
+                     "If this column is not present, then the ripple filter was not used."),
+                dtype="bool",
+                quantity="?",
+            ),
+            NWBDatasetSpec(
+                name="ripple_filter_lockout_period_in_samples",
+                neurodata_type_inc="VectorData",
+                doc=("If the ripple filter was used, lockout period in the number of samples. "
+                     "Uses trodes time (samplecount)."),
+                dtype="int",
+                quantity="?",
+            ),
+            NWBDatasetSpec(
+                name="ripple_filter_threshold_sd",
+                neurodata_type_inc="VectorData",
+                doc=("If the ripple filter was used, the threshold for detecting a ripple, in number of "
+                     "standard deviations."),
+                dtype="float",
+                quantity="?",
+            ),
+            NWBDatasetSpec(
+                name="ripple_filter_num_above_threshold",
+                neurodata_type_inc="VectorData",
+                doc=("If the ripple filter was used, the number of tetrodes that have their signal cross "
+                     "the standard deviation threshold."),
+                dtype="int",
+                quantity="?",
+            ),
+        ],
+    )
+
     new_data_types = [
         shanks_electrode,
         shanks,
@@ -343,7 +527,8 @@ def main():
         camera_device,
         header_device,
         associated_files,
-        nwb_electrode_group
+        nwb_electrode_group,
+        frank_lab_optogenetic_epochs_table,
     ]
 
     # export the spec to yaml files in the spec folder

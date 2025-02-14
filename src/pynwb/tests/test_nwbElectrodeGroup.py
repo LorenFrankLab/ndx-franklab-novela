@@ -1,3 +1,4 @@
+import numpy as np
 import unittest
 from unittest.mock import Mock
 
@@ -38,7 +39,10 @@ class TestNwbElectrodeGroup(unittest.TestCase):
         self.assertEqual(nwb_electrode_group.description, description)
         self.assertEqual(nwb_electrode_group.location, location)
         self.assertEqual(nwb_electrode_group.device, device)
-        self.assertEqual(nwb_electrode_group.position, position)
+        np.testing.assert_array_equal(
+            nwb_electrode_group.position,
+            np.array((1., 2., 3.), dtype=[('x', '<f8'), ('y', '<f8'), ('z', '<f8')])
+        )
         self.assertEqual(nwb_electrode_group.targeted_location, targeted_location)
         self.assertEqual(nwb_electrode_group.targeted_x, targeted_x)
         self.assertEqual(nwb_electrode_group.targeted_y, targeted_y)

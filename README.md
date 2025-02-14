@@ -5,23 +5,26 @@ ndx-franklab-novela is a python package containing NWB custom extensions for Lor
 
 # How to install
 
-Add ndx-franklab-novela to your conda environment
+Add ndx-franklab-novela to your conda environment:
+```
+pip install ndx-franklab-novela
+```
 
-`pip install git+git://github.com/LorenFrankLab/ndx-franklab-novela`
-
-The original published extension maintained by NovelaNeuro can be installed using:
-
-`conda install -c conda-forge -c novelakrk ndx-franklab-novela`
-
-
-# How to install
-
-Add ndx-franklab-novela to your conda environment<br>
-```pip install git+git://github.com/LorenFrankLab/ndx-franklab-novela```
+Or install the latest version from the repository:
+```
+pip install git+git://github.com/LorenFrankLab/ndx-franklab-novela
+```
 
 The original published extension maintained by NovelaNeuro can be installed using:
-```conda install -c conda-forge -c novelakrk ndx-franklab-novela```
+```
+conda install -c conda-forge -c novelakrk ndx-franklab-novela
+```
 
+# Dependencies
+
+This extension uses the [ndx-optogenetics](https://github.com/rly/ndx-optogenetics) extension.
+Installing ndx-franklab-novela will install the latest version of ndx-optogenetics from PyPI.
+Loading `ndx-franklab-novela` by importing `ndx_franklab_novela` will also load `ndx_optogenetics`.
 
 # Extensions
 
@@ -102,6 +105,31 @@ Representation of a camera device in NWB.
 - **model**  `string`: model of this camera device
 - **lens**  `string`: info about lens in this camera
 - **camera_name**  `string`: name of this camera
+- **frame_rate**  `float`: frame rate of this camera (optional)
+
+## FrankLabOptogeneticEpochsTable
+An extension of the `OptogeneticEpochsTable` from [ndx-optogenetics](https://github.com/rly/ndx-optogenetics) with the following columns:
+
+**Columns:**
+- **epoch_name**  `string`: name of this epoch
+- **epoch_number**  `int`: 1-indexed number of this epoch
+- **convenience_code**  `string`: convenience code of this epoch
+- **epoch_type**  `string`: type of this epoch
+- **theta_filter_on**  `bool`: whether the theta filter was on (optional)
+- **theta_filter_lockout_period_in_samples**  `int`: lockout period in samples for theta filter (optional)
+- **theta_filter_phase_in_deg**  `float`: phase in degrees for theta filter (optional)
+- **theta_filter_reference_ntrode**  `int`: reference ntrode for theta filter (optional)
+- **spatial_filter_on**  `bool`: whether the spatial filter was on (optional)
+- **spatial_filter_lockout_period_in_samples**  `int`: lockout period in samples for spatial filter (optional)
+- **spatial_filter_bottom_left_coord_in_pixels**  `float`, shape `(2, )`: bottom left coordinate in pixels for spatial filter (optional)
+- **spatial_filter_top_right_coord_in_pixels**  `float`, shape `(2, )`: top right coordinate in pixels for spatial filter (optional)
+- **spatial_filter_cameras_index**  `int`: index column for spatial filter cameras (optional)
+- **spatial_filter_cameras** : references to `CameraDevice` objects used for spatial filter (optional)
+- **spatial_filter_cameras_cm_per_pixel**  `float`: cm per pixel for spatial filter cameras (optional)
+- **ripple_filter_on**  `bool`: whether the ripple filter was on (optional)
+- **ripple_filter_lockout_period_in_samples**  `int`: lockout period in samples for ripple filter (optional)
+- **ripple_filter_threshold_sd**  `float`: threshold in standard deviations for ripple filter (optional)
+- **ripple_filter_num_above_threshold**  `int`: number of tetrodes above threshold for ripple filter (optional)
 
 ---
 This extension was created using [ndx-template](https://github.com/nwb-extensions/ndx-template).

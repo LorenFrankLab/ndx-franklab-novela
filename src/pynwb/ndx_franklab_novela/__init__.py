@@ -1,6 +1,9 @@
 import os
 
 from pynwb import load_namespaces, get_class
+import ndx_optogenetics  # noqa: F401
+# the above import is needed because the definition of FrankLabOptogeneticsEpochsTable
+# depends on the definition of OptogeneticEpochsTable in ndx_optogenetics
 
 # Set path of the namespace.yaml file to the expected install location
 
@@ -26,6 +29,7 @@ load_namespaces(ndx_franklab_novela_specpath)
 AssociatedFiles = get_class('AssociatedFiles', 'ndx-franklab-novela')
 CameraDevice = get_class('CameraDevice', 'ndx-franklab-novela')
 DataAcqDevice = get_class('DataAcqDevice', 'ndx-franklab-novela')
+FrankLabOptogeneticEpochsTable = get_class('FrankLabOptogeneticEpochsTable', 'ndx-franklab-novela')
 HeaderDevice = get_class('HeaderDevice', 'ndx-franklab-novela')
 NwbElectrodeGroup = get_class('NwbElectrodeGroup', 'ndx-franklab-novela')
 Probe = get_class('Probe', 'ndx-franklab-novela')
