@@ -11,7 +11,7 @@ def main():
         name="""ndx-franklab-novela""",
         version="""0.2.0""",
         author=["NovelaDevops", "Loren Frank", "Eric Denovellis", "Ryan Ly"],
-        contact=["devops@novelaneuro.com", "loren@cin.ucsf.edu", "eric.denovellis@ucsf.edu", "rly@lbl.gov"]
+        contact=["devops@novelaneuro.com", "loren.frank@ucsf.edu", "eric.denovellis@ucsf.edu", "rly@lbl.gov"]
     )
 
     ns_builder.include_namespace("core")
