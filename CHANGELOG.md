@@ -4,6 +4,8 @@
 
 - Added `FrankLabOptogeneticEpochsTable` to store optogenetic stimulation metadata.
 - Added extension dependency on `ndx-optogenetics`.
+- Added optional `frame_rate` field to `CameraDevice`.
+- Updated versions of dependencies.
 
 ## 0.1.0 (December 9, 2021)
 
