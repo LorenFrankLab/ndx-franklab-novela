@@ -33,8 +33,8 @@ setup_args = {
     'url': '',
     'license': 'BSD 3-Clause',
     'install_requires': [
-        'hdmf>=3.1.1,<5',
-        'pynwb>=2.0.0,<4',
+        'hdmf>=3.14.1,<5',
+        'pynwb>=2.8.0,<4',
         "ndx-optogenetics>=0.2.0",
     ],
     'packages': find_packages('src/pynwb'),
