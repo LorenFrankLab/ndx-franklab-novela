@@ -44,7 +44,8 @@ groups:
     doc: description of the probe
   - name: contact_side_numbering
     dtype: bool
-    doc: is contact_side_numbering enabled
+    doc: Whether the electrodes were numbered in a scheme wherein the contacts were electrodes facing up toward the viewer (true) or if the numbering was based on the electrodes facing down (false). This is relevant when the goal is to determine where in the tissue each electrode contact is located.
+    required: false
   - name: contact_size
     dtype: float
     doc: value of contact size in float
