@@ -392,29 +392,17 @@ def main():
                 quantity="?",
             ),
             NWBDatasetSpec(
-                name="spatial_filter_bottom_left_coord_in_pixels",
+                name="spatial_filter_nodes",
                 neurodata_type_inc="VectorData",
                 doc=(
-                    "If the spatial filter was used, the (x, y) coordinate of the bottom-left corner pixel of the "
-                    "rectangular region of the video that was used for space-specific stimulation. "
-                    "(0,0) is the bottom-left corner of the video. Use (-1, -1) if the spatial filter was not used."
+                    "If the spatial filter was used, the (x, y) coordinate of each "
+                    "boundary-defining nodes. NOTE: all regions must have the same "
+                    "number of nodes. For regions with fewer nodes, use (-1, -1) "
+                    "to fill the additional xy values."
                 ),
                 dtype="int",
-                shape=(None, 2),
-                dims=("n_epochs", "x y"),
-                quantity="?",
-            ),
-            NWBDatasetSpec(
-                name="spatial_filter_top_right_coord_in_pixels",
-                neurodata_type_inc="VectorData",
-                doc=(
-                    "If the spatial filter was used, the (x, y) coordinate of the top-right corner pixel of the "
-                    "rectangular region of the video that was used for space-specific stimulation. "
-                    "(0,0) is the bottom-left corner of the video. Use (-1, -1) if the spatial filter was not used."
-                ),
-                dtype="int",
-                shape=(None, 2),
-                dims=("n_epochs", "x y"),
+                shape=(None, None, None, 2),
+                dims=("n_epochs", "n_regions", "n_nodes", "x y"),
                 quantity="?",
             ),
             NWBDatasetSpec(
