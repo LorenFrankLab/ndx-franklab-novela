@@ -364,7 +364,9 @@ groups:
     quantity: '?'
   - name: stimulus_signal
     neurodata_type_inc: VectorData
-    dtype: object
+    dtype:
+      target_type: Timeseries
+      reftype: object
     doc: Timeseries of the delivered stimulus. Can be continuous values
       or time of digital on/off events
 
