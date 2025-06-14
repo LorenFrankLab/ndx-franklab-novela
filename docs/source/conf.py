@@ -46,6 +46,7 @@ intersphinx_mapping = {
 ###########################################################################
 
 import sphinx_rtd_theme  # noqa: E402
+import ndx_optogenetics  # noqa: E402 # necessary to load the namespace and classes for autodoc
 import textwrap  # noqa: E402
 
 # -- Options for intersphinx  ---------------------------------------------
