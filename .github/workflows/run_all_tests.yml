@@ -94,6 +94,7 @@ jobs:
 
       - name: Install the package from the wheel and check import
         run: |
+          python -m pip list
           python -m pip install dist/*-none-any.whl
           python -c "import ndx_franklab_novela"
 
