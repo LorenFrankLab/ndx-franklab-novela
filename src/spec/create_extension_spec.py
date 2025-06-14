@@ -184,7 +184,7 @@ def main():
             "specific to Loren Frank Lab experiments. If the spatial filter is ON, then the experimenter "
             "can stimulate in either open (frequency-based) or closed loop (theta-based), only when animal is in "
             "a particular position. If the spatial filter is OFF, then ignore the position "
-            "(this is not common / doesn't happen). If the spatial filter is ON and the experimeter is "
+            "(this is not common / doesn't happen). If the spatial filter is ON and the experimenter is "
             "stimulating in open loop mode and the animal enters the spatial filter rectangle, then "
             "immediately apply one and only one stimulation bout. If stimulating in closed loop mode and the animal "
             "enters the rectangle, then every time the particular theta phase is detected, "
