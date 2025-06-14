@@ -1,9 +1,9 @@
 
 .. _ndx-franklab-novela:
 
-********************
+*******************
 ndx-franklab-novela
-********************
+*******************
 
 Version |release| |today|
 

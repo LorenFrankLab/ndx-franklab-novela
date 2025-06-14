@@ -1,5 +1,0 @@
-# pinned dependencies to reproduce a working development environment
-hdmf_docutils==0.4.8
-hdmf==4.0.0
-pynwb==2.8.3
-ndx-optogenetics==0.2.0

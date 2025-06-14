@@ -12,25 +12,25 @@ class TestFrankLabOptogeneticsEpochsTable(TestCase):
         nwbfile = mock_NWBFile()
 
         camera1 = CameraDevice(
-            name='overhead_run_camera 1',
+            name="overhead_run_camera 1",
             description="Camera used for tracking running",
             meters_per_pixel=0.20,
-            camera_name='test name',
-            model='ndx2000',
-            lens='500dpt',
-            manufacturer='sony',
+            camera_name="test name",
+            model="ndx2000",
+            lens="500dpt",
+            manufacturer="sony",
             frame_rate=30.0,
         )
         nwbfile.add_device(camera1)
 
         camera2 = CameraDevice(
-            name='overhead_run_camera 2',
+            name="overhead_run_camera 2",
             description="Camera used for tracking running",
             meters_per_pixel=0.20,
-            camera_name='test name',
-            model='ndx2000',
-            lens='500dpt',
-            manufacturer='sony',
+            camera_name="test name",
+            model="ndx2000",
+            lens="500dpt",
+            manufacturer="sony",
             frame_rate=30.0,
         )
         nwbfile.add_device(camera2)
