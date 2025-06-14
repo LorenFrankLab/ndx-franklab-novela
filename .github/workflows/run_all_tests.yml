@@ -77,18 +77,9 @@ jobs:
           python -m build
           ls -1 dist
 
-      - name: Test installation from a wheel (POSIX)
-        if: ${{ matrix.os != 'windows-latest' }}
+      - name: Test installation from a wheel
         run: |
           python -m venv test-wheel-env
           source test-wheel-env/bin/activate
-          python -m pip install dist/*-none-any.whl
-          python -c "import ndx_franklab_novela"
-
-      - name: Test installation from a wheel (windows)
-        if: ${{ matrix.os == 'windows-latest' }}
-        run: |
-          python -m venv test-wheel-env
-          test-wheel-env/Scripts/activate.bat
           python -m pip install dist/*-none-any.whl
           python -c "import ndx_franklab_novela"
