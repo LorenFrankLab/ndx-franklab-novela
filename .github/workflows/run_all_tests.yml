@@ -67,6 +67,7 @@ jobs:
           python -m pip install -U ".[test]"
           python -m pip list
           python -m pip check
+
       - name: Run tests
         run: |
           pytest -v
@@ -77,18 +78,26 @@ jobs:
           python -m build
           ls -1 dist
 
-      - name: Test installation from a wheel (POSIX)
-        if: ${{ matrix.os != 'windows-latest' }}
+      - name: Create virtual environment for testing installation from the wheel
         run: |
           python -m venv test-wheel-env
+
+      - name: Activate virtual environment for testing installation from the wheel (POSIX)
+        if: ${{ matrix.os != 'windows-latest' }}
+        run: |
           source test-wheel-env/bin/activate
+
+      - name: Activate virtual environment for testing installation from the wheel (Windows)
+        if: ${{ matrix.os == 'windows-latest' }}
+        run: |
+          source test-wheel-env/Scripts/activate
+
+      - name: Install the package from the wheel and check import
+        run: |
           python -m pip install dist/*-none-any.whl
           python -c "import ndx_franklab_novela"
 
-      - name: Test installation from a wheel (windows)
-        if: ${{ matrix.os == 'windows-latest' }}
+      - name: Run tests in the virtual environment
         run: |
-          python -m venv test-wheel-env
-          source test-wheel-env/Scripts/activate
-          python -m pip install dist/*-none-any.whl
-          python -c "import ndx_franklab_novela"
+          python -m pip install pytest
+          pytest -v
