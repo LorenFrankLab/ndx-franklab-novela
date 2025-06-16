@@ -58,7 +58,17 @@ def main():
             NWBAttributeSpec(name="probe_type", doc="type of the probe", dtype="text"),
             NWBAttributeSpec(name="units", doc="units in probe, acceptable values um or mm", dtype="text"),
             NWBAttributeSpec(name="probe_description", doc="description of the probe", dtype="text"),
-            NWBAttributeSpec(name="contact_side_numbering", doc="is contact_side_numbering enabled", dtype="bool"),
+            NWBAttributeSpec(
+                name="contact_side_numbering",
+                doc=(
+                    "Whether the electrodes were numbered in a scheme wherein the contacts were "
+                    "electrodes facing up toward the viewer (true) or if the numbering was based "
+                    "on the electrodes facing down (false). This is relevant when the goal is to "
+                    "determine where in the tissue each electrode contact is located."
+                ),
+                dtype="bool",
+                required=False,
+            ),
             NWBAttributeSpec(name="contact_size", doc="value of contact size in float", dtype="float"),
         ],
     )
