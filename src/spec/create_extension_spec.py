@@ -392,11 +392,11 @@ def main():
                 quantity="?",
             ),
             NWBDatasetSpec(
-                name="spatial_filter_nodes",
+                name="spatial_filter_region_node_coordinates_in_pixels",
                 neurodata_type_inc="VectorData",
                 doc=(
                     "If the spatial filter was used, the (x, y) coordinate of each "
-                    "boundary-defining nodes. NOTE: all regions must have the same "
+                    "boundary-defining node for each region. NOTE: all regions must have the same "
                     "number of nodes. For regions with fewer nodes, use (-1, -1) "
                     "to fill the additional xy values."
                 ),
@@ -495,7 +495,7 @@ def main():
                 quantity="?",
             ),
             NWBDatasetSpec(
-                name="speed_filter_threshold",
+                name="speed_filter_threshold_in_cm_per_s",
                 neurodata_type_inc="VectorData",
                 doc=(
                     "If the speed filter was used, the threshold for detecting a fast/slow animal, in cm/s."
@@ -517,7 +517,10 @@ def main():
                 doc=(
                     "Timeseries of the delivered stimulus. Can be continuous values or time of digital on/off events."
                 ),
-                dtype="object",
+                dtype=NWBRefSpec(
+                    target_type="TimeSeries",
+                    reftype="object",
+                ),
             ),
         ],
     )
