@@ -85,7 +85,7 @@ Representation of a probe in NWB.
 - **probe_type**  `string`: type of probe
 - **units**  `string`: units in device
 - **probe_description**  `string`: description of probe
-- **contact_side_numbering**  `bool`: is contact_side_numbering enabled
+- **contact_side_numbering**  `bool`: Whether the electrodes were numbered in a scheme wherein the contacts were electrodes facing up toward the viewer (true) or if the numbering was based on the electrodes facing down (false). This is relevant when the goal is to determine where in the tissue each electrode contact is located. (optional)
 - **contact_size**  `float`: value of contact size as float
 - **shanks**  `dict`: shanks in the probe
 

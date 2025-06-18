@@ -1,4 +1,7 @@
-# ndx-franklab-novela Changelog
+# Changelog for ndx-franklab-novela
+
+## 0.2.1 (Upcoming)
+- Updated repository structure to use the latest NDX template.
 
 ## 0.2.0 (February 14, 2025)
 
