@@ -317,9 +317,7 @@ def main():
             NWBDatasetSpec(
                 name="spatial_filter_cameras_index",
                 neurodata_type_inc="VectorIndex",
-                doc=(
-                    "Index column for `spatial_filter_cameras` so that each epoch can have multiple cameras."
-                ),
+                doc=("Index column for `spatial_filter_cameras` so that each epoch can have multiple cameras."),
                 quantity="?",
             ),
             NWBDatasetSpec(
@@ -406,18 +404,14 @@ def main():
             NWBDatasetSpec(
                 name="speed_filter_threshold_in_cm_per_s",
                 neurodata_type_inc="VectorData",
-                doc=(
-                    "If the speed filter was used, the threshold for detecting a fast/slow animal, in cm/s."
-                ),
+                doc=("If the speed filter was used, the threshold for detecting a fast/slow animal, in cm/s."),
                 dtype="float",
                 quantity="?",
             ),
             NWBDatasetSpec(
                 name="speed_filter_on_above_threshold",
                 neurodata_type_inc="VectorData",
-                doc=(
-                    "If the speed filter was used, True if active when speed above threshold."
-                ),
+                doc=("If the speed filter was used, True if active when speed above threshold."),
                 dtype="bool",
             ),
             NWBAttributeSpec(
@@ -426,6 +420,7 @@ def main():
                 doc=(
                     "Timeseries of the delivered stimulus. Can be continuous values or time of digital on/off events."
                 ),
+                required=False,
                 dtype=NWBRefSpec(
                     target_type="TimeSeries",
                     reftype="object",
