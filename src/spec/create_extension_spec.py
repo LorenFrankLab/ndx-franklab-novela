@@ -414,17 +414,17 @@ def main():
                 doc=("If the speed filter was used, True if active when speed above threshold."),
                 dtype="bool",
             ),
-            NWBAttributeSpec(
+            NWBDatasetSpec(
                 name="stimulus_signal",
                 neurodata_type_inc="VectorData",
                 doc=(
                     "Timeseries of the delivered stimulus. Can be continuous values or time of digital on/off events."
                 ),
-                required=False,
                 dtype=NWBRefSpec(
                     target_type="TimeSeries",
                     reftype="object",
                 ),
+                quantity="?",
             ),
         ],
     )
