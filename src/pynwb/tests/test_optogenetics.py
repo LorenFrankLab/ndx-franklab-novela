@@ -105,7 +105,7 @@ class TestFrankLabOptogeneticsEpochsTable(TestCase):
             assert read_epochs[0, "theta_filter_reference_ntrode"] == 1
             assert read_epochs[0, "spatial_filter_on"]
             assert read_epochs[0, "spatial_filter_lockout_period_in_samples"] == 10
-            assert all(read_epochs[0, "spatial_filter_region_node_coordinates_in_pixels"][0] == (260, 920))
+            assert all(read_epochs[0, "spatial_filter_region_node_coordinates_in_pixels"] == ((260, 920), (800, 1050)))
             assert read_epochs[0, "spatial_filter_cameras"] == [read_camera1, read_camera2]
             assert all(read_epochs[0, "spatial_filter_cameras_cm_per_pixel"] == [0.3, 0.18])
             assert read_epochs[0, "ripple_filter_on"]
