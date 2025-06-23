@@ -1,3 +1,4 @@
+import numpy as np
 from pynwb import NWBHDF5IO
 from pynwb.testing.mock.file import mock_NWBFile
 from unittest import TestCase
@@ -60,8 +61,6 @@ class TestFrankLabOptogeneticsEpochsTable(TestCase):
             theta_filter_reference_ntrode=1,
             spatial_filter_on=True,
             spatial_filter_lockout_period_in_samples=10,
-            # spatial_filter_bottom_left_coord_in_pixels=(260, 920),
-            # spatial_filter_top_right_coord_in_pixels=(800, 1050),
             spatial_filter_region_node_coordinates_in_pixels=((260, 920), (800, 1050)),
             spatial_filter_cameras=[camera1, camera2],
             spatial_filter_cameras_cm_per_pixel=[0.3, 0.18],
@@ -105,7 +104,10 @@ class TestFrankLabOptogeneticsEpochsTable(TestCase):
             assert read_epochs[0, "theta_filter_reference_ntrode"] == 1
             assert read_epochs[0, "spatial_filter_on"]
             assert read_epochs[0, "spatial_filter_lockout_period_in_samples"] == 10
-            assert all(read_epochs[0, "spatial_filter_region_node_coordinates_in_pixels"] == ((260, 920), (800, 1050)))
+            assert np.array_equal(
+                read_epochs[0, "spatial_filter_region_node_coordinates_in_pixels"],
+                np.array([[260, 920], [800, 1050]]),
+            )
             assert read_epochs[0, "spatial_filter_cameras"] == [read_camera1, read_camera2]
             assert all(read_epochs[0, "spatial_filter_cameras_cm_per_pixel"] == [0.3, 0.18])
             assert read_epochs[0, "ripple_filter_on"]
