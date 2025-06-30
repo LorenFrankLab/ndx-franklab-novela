@@ -1,7 +1,14 @@
 # -*- coding: utf-8 -*-
 import os.path
 
-from pynwb.spec import NWBNamespaceBuilder, export_spec, NWBGroupSpec, NWBAttributeSpec, NWBDatasetSpec, NWBRefSpec
+from pynwb.spec import (
+    NWBNamespaceBuilder,
+    export_spec,
+    NWBGroupSpec,
+    NWBAttributeSpec,
+    NWBDatasetSpec,
+    NWBRefSpec,
+)
 
 
 def main():
@@ -294,29 +301,17 @@ def main():
                 quantity="?",
             ),
             NWBDatasetSpec(
-                name="spatial_filter_bottom_left_coord_in_pixels",
+                name="spatial_filter_region_node_coordinates_in_pixels",
                 neurodata_type_inc="VectorData",
                 doc=(
-                    "If the spatial filter was used, the (x, y) coordinate of the bottom-left corner pixel of the "
-                    "rectangular region of the video that was used for space-specific stimulation. "
-                    "(0,0) is the bottom-left corner of the video. Use (-1, -1) if the spatial filter was not used."
+                    "If the spatial filter was used, the (x, y) coordinate of each "
+                    "boundary-defining node for each region. NOTE: all regions must have the same "
+                    "number of nodes. For regions with fewer nodes, use (-1, -1) "
+                    "to fill the additional xy values."
                 ),
                 dtype="int",
-                shape=(None, 2),
-                dims=("n_epochs", "x y"),
-                quantity="?",
-            ),
-            NWBDatasetSpec(
-                name="spatial_filter_top_right_coord_in_pixels",
-                neurodata_type_inc="VectorData",
-                doc=(
-                    "If the spatial filter was used, the (x, y) coordinate of the top-right corner pixel of the "
-                    "rectangular region of the video that was used for space-specific stimulation. "
-                    "(0,0) is the bottom-left corner of the video. Use (-1, -1) if the spatial filter was not used."
-                ),
-                dtype="int",
-                shape=(None, 2),
-                dims=("n_epochs", "x y"),
+                shape=(None, None, None, 2),
+                dims=("n_epochs", "n_regions", "n_nodes", "x y"),
                 quantity="?",
             ),
             NWBDatasetSpec(
@@ -394,6 +389,41 @@ def main():
                     "the standard deviation threshold."
                 ),
                 dtype="int",
+                quantity="?",
+            ),
+            NWBDatasetSpec(
+                name="speed_filter_on",
+                neurodata_type_inc="VectorData",
+                doc=(
+                    "Whether the speed filter was on. Closed-loop stimulation based on whether the animal "
+                    "is moving fast/slow enough. If this column is not present, then the speed filter was not used."
+                ),
+                dtype="bool",
+                quantity="?",
+            ),
+            NWBDatasetSpec(
+                name="speed_filter_threshold_in_cm_per_s",
+                neurodata_type_inc="VectorData",
+                doc=("If the speed filter was used, the threshold for detecting a fast/slow animal, in cm/s."),
+                dtype="float",
+                quantity="?",
+            ),
+            NWBDatasetSpec(
+                name="speed_filter_on_above_threshold",
+                neurodata_type_inc="VectorData",
+                doc=("If the speed filter was used, True if active when speed above threshold."),
+                dtype="bool",
+            ),
+            NWBDatasetSpec(
+                name="stimulus_signal",
+                neurodata_type_inc="VectorData",
+                doc=(
+                    "Timeseries of the delivered stimulus. Can be continuous values or time of digital on/off events."
+                ),
+                dtype=NWBRefSpec(
+                    target_type="TimeSeries",
+                    reftype="object",
+                ),
                 quantity="?",
             ),
         ],

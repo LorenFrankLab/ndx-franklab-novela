@@ -1,5 +1,7 @@
+import numpy as np
 from pynwb import NWBHDF5IO
 from pynwb.testing.mock.file import mock_NWBFile
+from pynwb.testing.mock.base import mock_TimeSeries
 from unittest import TestCase
 
 from ndx_franklab_novela import FrankLabOptogeneticEpochsTable, CameraDevice
@@ -9,6 +11,9 @@ class TestFrankLabOptogeneticsEpochsTable(TestCase):
 
     def test_roundtrip(self):
         nwbfile = mock_NWBFile()
+
+        stimulus = mock_TimeSeries()
+        nwbfile.add_stimulus(stimulus)
 
         camera1 = CameraDevice(
             name="overhead_run_camera 1",
@@ -60,14 +65,17 @@ class TestFrankLabOptogeneticsEpochsTable(TestCase):
             theta_filter_reference_ntrode=1,
             spatial_filter_on=True,
             spatial_filter_lockout_period_in_samples=10,
-            spatial_filter_bottom_left_coord_in_pixels=(260, 920),
-            spatial_filter_top_right_coord_in_pixels=(800, 1050),
+            spatial_filter_region_node_coordinates_in_pixels=((260, 920), (800, 1050)),
             spatial_filter_cameras=[camera1, camera2],
             spatial_filter_cameras_cm_per_pixel=[0.3, 0.18],
             ripple_filter_on=True,
             ripple_filter_lockout_period_in_samples=10,
             ripple_filter_threshold_sd=5.0,
             ripple_filter_num_above_threshold=4,
+            speed_filter_on=True,
+            speed_filter_threshold_in_cm_per_s=10.0,
+            speed_filter_on_above_threshold=True,
+            stimulus_signal=stimulus,
         )
         nwbfile.add_time_intervals(opto_epochs)
 
@@ -103,11 +111,17 @@ class TestFrankLabOptogeneticsEpochsTable(TestCase):
             assert read_epochs[0, "theta_filter_reference_ntrode"] == 1
             assert read_epochs[0, "spatial_filter_on"]
             assert read_epochs[0, "spatial_filter_lockout_period_in_samples"] == 10
-            assert all(read_epochs[0, "spatial_filter_bottom_left_coord_in_pixels"] == (260, 920))
-            assert all(read_epochs[0, "spatial_filter_top_right_coord_in_pixels"] == (800, 1050))
+            assert np.array_equal(
+                read_epochs[0, "spatial_filter_region_node_coordinates_in_pixels"],
+                np.array([[260, 920], [800, 1050]]),
+            )
             assert read_epochs[0, "spatial_filter_cameras"] == [read_camera1, read_camera2]
             assert all(read_epochs[0, "spatial_filter_cameras_cm_per_pixel"] == [0.3, 0.18])
             assert read_epochs[0, "ripple_filter_on"]
             assert read_epochs[0, "ripple_filter_lockout_period_in_samples"] == 10
             assert read_epochs[0, "ripple_filter_threshold_sd"] == 5.0
             assert read_epochs[0, "ripple_filter_num_above_threshold"] == 4
+            assert read_epochs[0, "speed_filter_on"]
+            assert read_epochs[0, "speed_filter_threshold_in_cm_per_s"] == 10.0
+            assert read_epochs[0, "speed_filter_on_above_threshold"]
+            assert read_epochs[0, "stimulus_signal"].object_id == stimulus.object_id
