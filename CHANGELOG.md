@@ -1,7 +1,13 @@
 # Changelog for ndx-franklab-novela
 
-## 0.2.1 (Upcoming)
+## 0.2.1 (July 1, 2025)
+
 - Updated repository structure to use the latest NDX template.
+- Updatesd values stored in `FrankLabOptogeneticEpochsTable`
+  - speed-filtered parameter settings
+  - generic spatial region definition
+  - reference to stimulus timeseries
+- Makes `Probe.contact_side_numbering` optional
 
 ## 0.2.0 (February 14, 2025)
 
