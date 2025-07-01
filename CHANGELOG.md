@@ -4,9 +4,9 @@
 
 - Updated repository structure to use the latest NDX template.
 - Updated values stored in `FrankLabOptogeneticEpochsTable`
-  - speed-filtered parameter settings
-  - generic spatial region definition
-  - reference to stimulus timeseries
+  - Speed-filtered parameter settings
+  - Generic spatial region definition
+  - Reference to stimulus timeseries
 - Makes `Probe.contact_side_numbering` optional
 
 ## 0.2.0 (February 14, 2025)
