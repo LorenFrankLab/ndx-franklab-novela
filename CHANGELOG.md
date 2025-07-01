@@ -3,7 +3,7 @@
 ## 0.2.1 (July 1, 2025)
 
 - Updated repository structure to use the latest NDX template.
-- Updatesd values stored in `FrankLabOptogeneticEpochsTable`
+- Updated values stored in `FrankLabOptogeneticEpochsTable`
   - speed-filtered parameter settings
   - generic spatial region definition
   - reference to stimulus timeseries
