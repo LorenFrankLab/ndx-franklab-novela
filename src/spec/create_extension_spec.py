@@ -413,6 +413,7 @@ def main():
                 neurodata_type_inc="VectorData",
                 doc=("If the speed filter was used, True if active when speed above threshold."),
                 dtype="bool",
+                quantity="?",
             ),
             NWBDatasetSpec(
                 name="stimulus_signal",
