@@ -35,7 +35,7 @@ keywords = [
     'ndx-extension',
 ]
 dependencies = [
-    "pynwb>=2.8.3,<4",
+    "pynwb>=2.8.3,<3.1",
     "hdmf>=4.0.0,<5",
     "ndx-optogenetics>=0.2.0",
 ]
