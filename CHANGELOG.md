@@ -1,5 +1,9 @@
 # Changelog for ndx-franklab-novela
 
+## 0.2.2 (Unreleased)
+
+- Make `speed_filter_on_above_threshold` optional in `FrankLabOptogeneticEpochsTable`
+
 ## 0.2.1 (July 1, 2025)
 
 - Updated repository structure to use the latest NDX template.
