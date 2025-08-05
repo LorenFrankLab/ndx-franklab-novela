@@ -345,6 +345,7 @@ groups:
     neurodata_type_inc: VectorData
     dtype: bool
     doc: If the speed filter was used, True if active when speed above threshold.
+    quantity: '?'
   - name: stimulus_signal
     neurodata_type_inc: VectorData
     dtype:

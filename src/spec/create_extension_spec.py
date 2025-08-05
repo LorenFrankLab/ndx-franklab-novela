@@ -15,7 +15,7 @@ def main():
     # these arguments were auto-generated from your cookiecutter inputs
     ns_builder = NWBNamespaceBuilder(
         name="""ndx-franklab-novela""",
-        version="""0.2.1""",
+        version="""0.2.2""",
         doc="""NWB extension to store additional metadata and data types for Loren Frank's Lab""",
         author=[
             "NovelaNeurotechnologies",
