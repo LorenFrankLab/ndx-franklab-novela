@@ -37,7 +37,7 @@ keywords = [
 dependencies = [
     "pynwb>=2.8.3,<3.1",
     "hdmf>=4.0.0,<5",
-    "ndx-optogenetics>=0.2.0",
+    "ndx-optogenetics==0.2.0",
 ]
 
 [project.optional-dependencies]
@@ -65,6 +65,7 @@ dev = [
 min-reqs = [
     "pynwb==2.8.3",
     "hdmf==4.0.0",
+    "ndx-optogenetics==0.2.0",
 ]
 
 [project.urls]
