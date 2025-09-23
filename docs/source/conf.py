@@ -10,8 +10,8 @@ project = 'ndx-franklab-novela'
 copyright = '2025, NovelaNeurotechnologies, Loren Frank, Eric Denovellis, Ryan Ly'
 author = 'NovelaNeurotechnologies, Loren Frank, Eric Denovellis, Ryan Ly'
 
-version = '0.2.2'
-release = '0.2.2'
+version = '0.2.3'
+release = '0.2.3'
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration

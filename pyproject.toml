@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "ndx-franklab-novela"
-version = "0.2.2"
+version = "0.2.3"
 authors = [
     { name="NovelaNeurotechnologies", email="devops@novelaneuro.com" },
     { name="Loren Frank", email="loren.frank@ucsf.edu" },

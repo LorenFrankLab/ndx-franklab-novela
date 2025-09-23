@@ -1,8 +1,13 @@
 # Changelog for ndx-franklab-novela
 
+## 0.2.3 (September 22, 2025)
+
+- Pinned `ndx-optogenetics` dependency to version 0.2.0.
+- Fixed usage of `spatial_filter_region_node_coordinates_in_pixels` in tests to match the expected shape.
+
 ## 0.2.2 (August 4, 2025)
 
-- Make `speed_filter_on_above_threshold` optional in `FrankLabOptogeneticEpochsTable`
+- Made `speed_filter_on_above_threshold` optional in `FrankLabOptogeneticEpochsTable`
 
 ## 0.2.1 (July 1, 2025)
 
@@ -11,7 +16,7 @@
   - Speed-filtered parameter settings
   - Generic spatial region definition
   - Reference to stimulus timeseries
-- Makes `Probe.contact_side_numbering` optional
+- Made `Probe.contact_side_numbering` optional
 
 ## 0.2.0 (February 14, 2025)
 
