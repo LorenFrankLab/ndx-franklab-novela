@@ -2,7 +2,7 @@ import numpy as np
 from pynwb import NWBHDF5IO
 from pynwb.testing.mock.file import mock_NWBFile
 from pynwb.testing.mock.base import mock_TimeSeries
-from pynwb.model import DeviceModel
+from pynwb.device import DeviceModel
 from unittest import TestCase
 
 from ndx_franklab_novela import FrankLabOptogeneticEpochsTable, CameraDevice

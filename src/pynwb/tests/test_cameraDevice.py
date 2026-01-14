@@ -1,7 +1,7 @@
 from unittest import TestCase
 
 from ndx_franklab_novela import CameraDevice
-from pynwb.model import DeviceModel
+from pynwb.device import DeviceModel
 
 
 class TestCameraDevice(TestCase):
