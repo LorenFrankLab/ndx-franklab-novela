@@ -1,7 +1,6 @@
 from importlib.resources import files
 import os
 from pynwb import load_namespaces, get_class
-from pynwb.device import DeviceModel  # noqa: F401
 
 import ndx_optogenetics  # noqa: F401
 
