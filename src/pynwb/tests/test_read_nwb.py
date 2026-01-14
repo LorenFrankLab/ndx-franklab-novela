@@ -5,7 +5,7 @@ import pynwb
 from dateutil.tz import tzlocal
 from pynwb import NWBFile
 from pynwb import NWBHDF5IO, ProcessingModule
-from pynwb.device import Device
+from pynwb.device import Device, DeviceModel
 from pynwb.testing import TestCase
 
 from ndx_franklab_novela import CameraDevice, AssociatedFiles
@@ -109,14 +109,15 @@ class TestNWBFileReading(TestCase):
         self.delete_nwb("data_acq_device")
 
     def test_read_nwb_camera_device_successfully(self):
+        camera_model = DeviceModel(name="ndx2000", manufacturer="sony", model_number="ndx2000")
         camera_device = CameraDevice(
             name="CameraDevice1",
             meters_per_pixel=0.20,
             camera_name="test name",
-            model="ndx2000",
+            model=camera_model,
             lens="500dpt",
-            manufacturer="sony",
         )
+        self.nwb_file_content.add_device_model(camera_model)
         self.nwb_file_content.add_device(camera_device)
 
         nwb_file_handler = NWBHDF5IO("camera_device.nwb", mode="w")
