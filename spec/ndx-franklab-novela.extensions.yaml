@@ -81,9 +81,6 @@ groups:
   - name: camera_name
     dtype: text
     doc: name of the camera
-  - name: model
-    dtype: text
-    doc: model of this camera device
   - name: lens
     dtype: text
     doc: lens info
@@ -91,6 +88,10 @@ groups:
     dtype: float
     doc: Frame rate of the camera, in frames per second.
     required: false
+  links:
+  - name: model
+    target_type: DeviceModel
+    doc: model of this camera device
 - neurodata_type_def: HeaderDevice
   neurodata_type_inc: Device
   doc: metadata from global configuration from header

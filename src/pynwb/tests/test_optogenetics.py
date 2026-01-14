@@ -2,6 +2,7 @@ import numpy as np
 from pynwb import NWBHDF5IO
 from pynwb.testing.mock.file import mock_NWBFile
 from pynwb.testing.mock.base import mock_TimeSeries
+from pynwb.model import DeviceModel
 from unittest import TestCase
 
 from ndx_franklab_novela import FrankLabOptogeneticEpochsTable, CameraDevice
@@ -15,14 +16,16 @@ class TestFrankLabOptogeneticsEpochsTable(TestCase):
         stimulus = mock_TimeSeries()
         nwbfile.add_stimulus(stimulus)
 
+        camera_model = DeviceModel(name="ndx2000", manufacturer="sony", model_number="ndx2000")
+        nwbfile.add_device_model(camera_model)
+
         camera1 = CameraDevice(
             name="overhead_run_camera 1",
             description="Camera used for tracking running",
             meters_per_pixel=0.20,
             camera_name="test name",
-            model="ndx2000",
+            model=camera_model,
             lens="500dpt",
-            manufacturer="sony",
             frame_rate=30.0,
         )
         nwbfile.add_device(camera1)
@@ -32,9 +35,8 @@ class TestFrankLabOptogeneticsEpochsTable(TestCase):
             description="Camera used for tracking running",
             meters_per_pixel=0.20,
             camera_name="test name",
-            model="ndx2000",
+            model=camera_model,
             lens="500dpt",
-            manufacturer="sony",
             frame_rate=30.0,
         )
         nwbfile.add_device(camera2)
@@ -67,7 +69,7 @@ class TestFrankLabOptogeneticsEpochsTable(TestCase):
             spatial_filter_lockout_period_in_samples=10,
             # below is an example of a single rectangular spatial filter region defined by the pixel coordinates of the
             # four corners
-            spatial_filter_region_node_coordinates_in_pixels=(((260, 920), (260, 800), (800, 1050), (800, 920)), ),
+            spatial_filter_region_node_coordinates_in_pixels=(((260, 920), (260, 800), (800, 1050), (800, 920)),),
             spatial_filter_cameras=[camera1, camera2],
             spatial_filter_cameras_cm_per_pixel=[0.3, 0.18],
             ripple_filter_on=True,
@@ -115,7 +117,7 @@ class TestFrankLabOptogeneticsEpochsTable(TestCase):
             assert read_epochs[0, "spatial_filter_lockout_period_in_samples"] == 10
             assert np.array_equal(
                 read_epochs[0, "spatial_filter_region_node_coordinates_in_pixels"],
-                np.array((((260, 920), (260, 800), (800, 1050), (800, 920)), )),
+                np.array((((260, 920), (260, 800), (800, 1050), (800, 920)),)),
             )
             assert read_epochs[0, "spatial_filter_cameras"] == [read_camera1, read_camera2]
             assert all(read_epochs[0, "spatial_filter_cameras_cm_per_pixel"] == [0.3, 0.18])
