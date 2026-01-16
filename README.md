@@ -120,7 +120,6 @@ Representation of a camera device in NWB.
 **Attributes:**
 
 - **meters_per_pixel**  `float`: meters per pixel
-- **model**  `string`: model of this camera device
 - **lens**  `string`: info about lens in this camera
 - **camera_name**  `string`: name of this camera
 - **frame_rate**  `float`: frame rate of this camera (optional)

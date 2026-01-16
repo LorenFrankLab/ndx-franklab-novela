@@ -1,5 +1,9 @@
 # Changelog for ndx-franklab-novela
 
+## 0.2.4 (January 16, 2026)
+
+- Updated `ndx-optogenetics` dependency to version 0.3.0 and minimum `pynwb` dependency to version 3.1.3.
+
 ## 0.2.3 (September 22, 2025)
 
 - Pinned `ndx-optogenetics` dependency to version 0.2.0.
