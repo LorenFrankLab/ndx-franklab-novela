@@ -12,6 +12,12 @@ jobs:
   run-all-tests:
     name: ${{ matrix.name }}
     runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        # PowerShell only propagates the last command's exit code, so a failed
+        # pip install silently falls through to `pytest`. bash (-e by default
+        # on runners) fails the step at the first failing command instead.
+        shell: bash
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}-${{ matrix.name }}
       cancel-in-progress: true
@@ -19,20 +25,17 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - { name: linux-python3.9-minimum      , requirements: minimum    , python-ver: "3.9" , os: ubuntu-latest }
-          - { name: linux-python3.9              , requirements: upgraded   , python-ver: "3.9" , os: ubuntu-latest }
+          - { name: linux-python3.10-minimum     , requirements: minimum    , python-ver: "3.10", os: ubuntu-latest }
           - { name: linux-python3.10             , requirements: upgraded   , python-ver: "3.10", os: ubuntu-latest }
           - { name: linux-python3.11             , requirements: upgraded   , python-ver: "3.11", os: ubuntu-latest }
           - { name: linux-python3.12             , requirements: upgraded   , python-ver: "3.12", os: ubuntu-latest }
           - { name: linux-python3.13             , requirements: upgraded   , python-ver: "3.13", os: ubuntu-latest }
-          - { name: windows-python3.9-minimum    , requirements: minimum    , python-ver: "3.9" , os: windows-latest }
-          - { name: windows-python3.9            , requirements: upgraded   , python-ver: "3.9" , os: windows-latest }
+          - { name: windows-python3.10-minimum   , requirements: minimum    , python-ver: "3.10", os: windows-latest }
           - { name: windows-python3.10           , requirements: upgraded   , python-ver: "3.10", os: windows-latest }
           - { name: windows-python3.11           , requirements: upgraded   , python-ver: "3.11", os: windows-latest }
           - { name: windows-python3.12           , requirements: upgraded   , python-ver: "3.12", os: windows-latest }
           - { name: windows-python3.13           , requirements: upgraded   , python-ver: "3.13", os: windows-latest }
-          - { name: macos-python3.9-minimum      , requirements: minimum    , python-ver: "3.9" , os: macos-latest }
-          - { name: macos-python3.9              , requirements: upgraded   , python-ver: "3.9" , os: macos-latest }
+          - { name: macos-python3.10-minimum     , requirements: minimum    , python-ver: "3.10", os: macos-latest }
           - { name: macos-python3.10             , requirements: upgraded   , python-ver: "3.10", os: macos-latest }
           - { name: macos-python3.11             , requirements: upgraded   , python-ver: "3.11", os: macos-latest }
           - { name: macos-python3.12             , requirements: upgraded   , python-ver: "3.12", os: macos-latest }
@@ -52,7 +55,7 @@ jobs:
         if: ${{ matrix.requirements == 'minimum' }}
         run: |
           python -m pip install --upgrade pip
-          python -m pip install ".[min-reqs,test]"
+          python -m pip install --group test ".[min-reqs]"
           python -m pip list
           python -m pip check
 
@@ -61,9 +64,24 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           # force upgrade of all dependencies to latest versions within allowed range
-          python -m pip install -U ".[test]"
+          python -m pip install -U --group test .
           python -m pip list
           python -m pip check
+
+      - name: Generate backward-compatibility fixtures (pre-upgrade stack)
+        run: |
+          # Built in a throwaway environment pinned to the OLD stack, then read
+          # back by the test suite running on the stack installed above. Same
+          # env for both would only prove round-tripping. See
+          # src/pynwb/tests/fixture-stack.txt.
+          python -m venv .fixture-env
+          FIXTURE_PY="$PWD/.fixture-env/bin/python"
+          # Windows runners put the interpreter under Scripts/ instead.
+          [ -x "$FIXTURE_PY" ] || FIXTURE_PY="$PWD/.fixture-env/Scripts/python.exe"
+          "$FIXTURE_PY" -m pip install --upgrade pip
+          "$FIXTURE_PY" -m pip install -r src/pynwb/tests/fixture-stack.txt .
+          "$FIXTURE_PY" -m pip check
+          "$FIXTURE_PY" src/pynwb/tests/make_fixtures.py
 
       - name: Run tests
         run: |
@@ -150,7 +168,10 @@ jobs:
       - name: Checkout repo to access tests
         uses: actions/checkout@v4
 
-      - name: Install pytest and run tests
+      - name: Install test dependencies and run tests
         run: |
-          python -m pip install pytest
+          # the test group, not bare pytest: the suite also needs pyyaml and
+          # pytest-subtests, which the package itself does not depend on
+          python -m pip install --group test
+          python -m pip list
           pytest -v
